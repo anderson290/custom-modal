@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import './assets/fonts.scss';
+@import './assets/variables.scss';
+
+h1 {
+    font-family: $font-regular;
+}
+
+p {
+    font-family:$font-light;
+}

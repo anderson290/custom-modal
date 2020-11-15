@@ -1,0 +1,15 @@
+<div class="modal">
+  <div class="modal__content modal__content__{{options.size}}">
+    <div class="modal__header">
+      <h1>{{ options?.title }}</h1>
+      <i class="fa fa-times" (click)="closeModal(false)"></i>
+    </div>
+    <div class="modal__body">
+      <ng-container #alertContainer></ng-container>
+    </div>
+    <div class="modal__footer">
+      <button (click)="closeModal(false)">Cancel</button>
+      <button (click)="closeModal(true)">Confirm</button>
+    </div>
+  </div>
+</div>
