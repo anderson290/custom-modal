@@ -1,27 +1,35 @@
-import { AfterViewInit, Component, ComponentFactory, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ComponentFactoryResolver,
+  ComponentRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { ModalOptions } from '../models/modal';
 import { ModalService } from './modal.service';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.scss']
+  styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
-
+  @ViewChild('modalContent', { read: ViewContainerRef }) modalContent;
   options: ModalOptions;
-  @ViewChild("alertContainer", { read: ViewContainerRef }) container;
   componentRef: ComponentRef<any>;
 
   constructor(
     private modalService: ModalService,
     private componentFactoryResolver: ComponentFactoryResolver
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getOptions();
   }
-  
+
   ngAfterViewInit() {
     this.getContent();
   }
@@ -31,9 +39,11 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getContent() {
-    this.container.clear(); 
-    const factory = this.componentFactoryResolver.resolveComponentFactory(this.modalService.content);
-    this.componentRef = this.container.createComponent(factory);
+    this.modalContent.clear();
+    const factory = this.componentFactoryResolver.resolveComponentFactory(
+      this.modalService.content
+    );
+    this.componentRef = this.modalContent.createComponent(factory);
   }
 
   getOptions() {
@@ -41,7 +51,6 @@ export class ModalComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.componentRef.destroy();    
+    this.componentRef.destroy();
   }
-
 }

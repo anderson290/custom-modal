@@ -28,6 +28,9 @@
     &__small {
       width: 765px; 
     }
+    &__medium {
+      width: 945px; 
+    }
     &__large {
       width: 1074px; 
     }
@@ -45,14 +48,6 @@
       padding: 1rem;
       font-size: 1rem;
       font-weight: 500;
-      cursor: pointer;
-      background-color: transparent;
-      text-transform: lowercase;
-      transition: background .5s;
-      &:hover {
-        background: $black;
-        color: $white;
-      }
     }
   }
 }

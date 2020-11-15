@@ -14,14 +14,25 @@ export class AppComponent {
 
   constructor(
     private modalService: ModalService
-  ) {}
+  ) {
+  }
 
   openModal() {
     const modalOptions: ModalOptions = {
       title: 'test',
-      size: ModalSize.small
+      size: ModalSize.small,
+      confirmation: true,
+      confirmButtonText: 'confirm',
+      cancelButtonText: 'cancel'
     }
     this.modalService.open(TemplateComponent, modalOptions);
+    this.onCloseModal();
+  }
+
+  onCloseModal() {
+    this.modalService.onClose.subscribe(response => {
+      console.log(response);
+    });
   }
 
   isModalVisible() {

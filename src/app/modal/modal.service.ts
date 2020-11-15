@@ -1,10 +1,14 @@
-import { Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { ModalOptions } from '../models/modal';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModalService {
+  onCloseSubject = new BehaviorSubject<boolean>(null);
+  onClose = this.onCloseSubject.asObservable();
+
   isVisible: boolean = false;
   options: ModalOptions;
   content: any;
@@ -19,6 +23,11 @@ export class ModalService {
 
   close(state) {
     this.isVisible = false;
+    this.setOnCloseState({ confirmation: state });
+  }
+
+  setOnCloseState(state) {
+    this.onCloseSubject.next(state);
   }
 
   getModalOptions() {
